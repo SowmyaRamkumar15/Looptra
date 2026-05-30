@@ -1,0 +1,56 @@
+BFS
+    Push Start
+    ↓
+    Pop Node
+    ↓
+    Visit Neighbors
+    ↓
+    Push Unvisited Neighbors
+    ↓
+    Repeat
+BFS Flow
+    1. Add starting node to queue.
+    2. Mark it visited.
+    3. Remove node from queue.
+    4. Add node to answer.
+    5. Visit all unvisited neighbors.
+    6. Add neighbors to queue.
+    7. Repeat until queue becomes empty.
+
+Code 
+    class Solution {
+        public ArrayList<Integer> bfs(ArrayList<ArrayList<Integer>> adj) {
+    
+            int v = adj.size(); // Number of vertices
+    
+            boolean[] visited = new boolean[v]; // Track visited nodes
+    
+            Queue<Integer> q = new LinkedList<>(); // Queue for BFS
+    
+            ArrayList<Integer> ans = new ArrayList<>(); // Store BFS traversal
+    
+            q.offer(0); // Start from node 0
+            visited[0] = true; // Mark node 0 as visited
+    
+            while (!q.isEmpty()) {
+    
+                int node = q.poll(); // Remove front node
+    
+                ans.add(node); // Add to answer
+    
+                // Traverse all neighbors
+                for (int i : adj.get(node)) {
+    
+                    // If neighbor not visited
+                    if (!visited[i]) {
+    
+                        visited[i] = true; // Mark visited
+    
+                        q.offer(i); // Add to queue
+                    }
+                }
+            }
+    
+            return ans; // Return BFS traversal
+        }
+}
